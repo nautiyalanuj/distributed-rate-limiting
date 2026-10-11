@@ -1,0 +1,36 @@
+server:
+  port: ${PORT:8080}
+spring:
+  application:
+    name: quota-service
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: ${REDIS_TIMEOUT:500ms}
+      connect-timeout: ${REDIS_CONNECT_TIMEOUT:1s}
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+      fail-on-null-for-primitives: true
+      fail-on-missing-creator-properties: true
+quota:
+  security:
+    admin-token: ${QUOTA_ADMIN_TOKEN}
+    service-token: ${QUOTA_SERVICE_TOKEN}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: readinessState,redis
+  health:
+    redis:
+      enabled: true

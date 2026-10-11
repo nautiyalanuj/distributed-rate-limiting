@@ -1,0 +1,17 @@
+server:
+  port: ${PORT:8081}
+spring:
+  application:
+    name: demo-service
+quota:
+  url: ${QUOTA_URL:http://localhost:8080}
+  token: ${QUOTA_SERVICE_TOKEN}
+  batch-size: ${QUOTA_BATCH_SIZE:5}
+  timeout-millis: ${QUOTA_TIMEOUT_MILLIS:500}
+instance:
+  id: ${INSTANCE_ID:local-instance}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
